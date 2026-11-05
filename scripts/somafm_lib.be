@@ -1,8 +1,9 @@
 # @module  somafm_lib
 # @name    SomaFM library
-# @desc    Channel table, colours and drawing helpers shared by "SomaFM" (tuner) and "SomaFM Now" (card)
+# @desc    Do not install this script directly. Install SomaFM Radio to get the whole package: https://awtrix.de/script/lR85BD2PCMjm
 # @author  Thomas
-# @version 1.1
+# @version 1.1.1
+# @display 52x16
 
 import string
 

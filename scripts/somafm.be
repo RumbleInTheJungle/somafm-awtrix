@@ -1,9 +1,10 @@
 # @name     SomaFM
-# @desc     SomaFM radio tuner. Pick a channel and it plays on the clock's speaker. Favourites first; knob = volume while playing.
+# @desc     Do not install this script directly. Install SomaFM Radio to get the whole package: https://awtrix.de/script/lR85BD2PCMjm
 # @author   Thomas
-# @version  1.1
+# @version  1.1.1
 # @ondemand
-# @requires somafm_lib
+# @display  52x16
+# @requires somafm_lib tUwQ3ndGHAUU
 # @config   autoclose number "Close after idle"  default=10 min=0 max=120 unit=s help="Return to the clock this many seconds after the last input on the now-playing screen. 0 = never."
 # @config   big       bool   "Large title"       default=true help="Bigger song title on the now-playing screen"
 # @config   accent    color  "Accent colour"     default=#FFA830

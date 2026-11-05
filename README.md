@@ -15,7 +15,7 @@ Unofficial hobby project, not affiliated with or endorsed by SomaFM. SomaFM is l
 |---|---|---|
 | `scripts/somafm_lib.be` | `somafm_lib` | Shared module: channel table with colours, parsing and drawing helpers |
 | `scripts/somafm.be` | `SomaFM` | Tuner (`@ondemand`) |
-| `scripts/somafm_now.be` | `SomaFM Now` | Now-playing card for the rotation |
+| `scripts/somafm_now.be` | `SomaFM-Radio` | Now-playing card for the rotation |
 | `scripts/spike.be` | `SomaFM Spike` | Throwaway hardware test (see below) |
 | `tools/gen_channels.py` | – | Regenerates the channel table and colours from somafm.com |
 | `tools/mockup.py` | – | Renders `docs/mockups.png` |
@@ -23,9 +23,13 @@ Unofficial hobby project, not affiliated with or endorsed by SomaFM. SomaFM is l
 
 ## Install
 
+**From the AWTRIX Hub (easiest):** open [SomaFM Radio](https://awtrix.de/script/lR85BD2PCMjm), send it to your clock and choose **Install with dependencies**. That installs the card, the tuner and the shared library in one go.
+
+**By hand:**
+
 1. In the AWTRIX web UI, open **Scripts**. Create a script named **`somafm_lib`**, paste `scripts/somafm_lib.be` and save. Install the module first, because the other two import it.
 2. Create **`SomaFM`** from `scripts/somafm.be`. It appears under "In the device menu".
-3. Create **`SomaFM Now`** from `scripts/somafm_now.be` and keep it active in the rotation.
+3. Create a script from `scripts/somafm_now.be`, for example **`SomaFM-Radio`**, and keep it active in the rotation.
 4. Optional: set the radio volume once in **Audio → Mixer** (`radioVolume`).
 
 You can also install or update a script from a computer, without pasting. This replaces it only if the stored source still matches `expected_source`, and restores the old version if the new one doesn't compile (the install name here is your own):
@@ -111,6 +115,7 @@ Tested on a TC002 with firmware 1.2.3:
 - the tuner saving that list and using it (`channel list: 51 from SomaFM, updated 20261104`)
 - adding favourites from the knob, and keeping them across a reboot
 - the knob remote on the SomaFM Now card: switching favourites, and opening the tuner from the clock itself
+- installing all three scripts from the AWTRIX Hub with **Install with dependencies**
 
 Not confirmed by a test or log yet:
 - closing after idle

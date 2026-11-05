@@ -1,8 +1,10 @@
-# @name     SomaFM Now
-# @desc     Channel name, plus artist and title of what the SomaFM radio is playing. Turn the knob to switch favourites, press it to open the tuner. Joins the rotation only while SomaFM plays.
+# @name     SomaFM Radio
+# @desc     Listen to SomaFM on the clock's own speaker. Shows the channel, artist and title in the rotation while SomaFM plays. Turn the knob to switch favourites, press it to open the tuner.
 # @author   Thomas
 # @version  1.1
-# @requires somafm_lib
+# @display  52x16
+# @requires somafm_lib tUwQ3ndGHAUU
+# @requires SomaFM E0TtuZwX4rjx
 # @config   big     bool  "Large title"   default=true help="Bigger song title, easier to read from across the room"
 # @config   accent  color "Channel name colour" default=#FFA830
 # @config   host    text  "Clock API address" default="127.0.0.1" help="Used to open the SomaFM tuner. If it won't open, enter this clock's own IP address."
