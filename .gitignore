@@ -1,0 +1,9 @@
+# SomaFM channel logos: local preview only, not ours to publish
+docs/logos_16x16.png
+
+.DS_Store
+.venv/
+
+# Personal: UX notes and my Home Assistant setup
+docs/ux.md
+homeassistant/
