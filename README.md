@@ -2,7 +2,9 @@
 
 Listen to [SomaFM](https://somafm.com) on the TC002's own speaker and see what's playing, on its 52×16 LED display.
 
-Unofficial hobby project, not affiliated with or endorsed by SomaFM. SomaFM is listener-supported, so please [support them](https://somafm.com/support/) if you enjoy it.
+Unofficial hobby project, not affiliated with or endorsed by SomaFM but used with their permission. SomaFM is listener-supported, so please [support them](https://somafm.com/support/) if you enjoy it.
+
+> **Building on this code?** SomaFM's streams and JSON files are not a free data feed, and this project's permission doesn't carry over to forks. Read their [Terms of Service](https://somafm.com/contact/tos.html) and [NOTICE.md](NOTICE.md) first, get your own permission and change the User-Agent.
 
 - **SomaFM** (tuner, started from the menu): pick a channel and it plays. Your favourites come first, and the knob sets the volume.
 - **SomaFM Now** (rotation card): while a SomaFM channel plays, it appears in the normal app rotation and shows the channel name on top and `Artist - Title` below. When nothing is playing, it hides.
@@ -19,7 +21,7 @@ Unofficial hobby project, not affiliated with or endorsed by SomaFM. SomaFM is l
 | `scripts/spike.be` | `SomaFM Spike` | Throwaway hardware test (see below) |
 | `tools/gen_channels.py` | – | Regenerates the channel table and colours from somafm.com |
 | `tools/mockup.py` | – | Renders `docs/mockups.png` |
-| `tools/logo_sheet.py` | – | Renders a local 16×16 preview of the channel logos (not committed; the logos belong to SomaFM) |
+| `tools/logo_sheet.py` | – | Renders a local 16×16 preview of the channel logos (not committed; the logos are copyrighted by SomaFM, see [NOTICE.md](NOTICE.md)) |
 
 ## Install
 
@@ -76,7 +78,7 @@ The tuner must be installed under the exact name `SomaFM`. The card gets your fa
 
 ## Channel list
 
-The tuner has all 51 channels built in, so it works offline and opens instantly. Once a day it also downloads SomaFM's `channels.json` in the background (58 KB, read with a string scan instead of `json.load`), so seasonal channels appear and disappear. A channel that SomaFM adds later appears with a grey colour bar. To give it a colour, and to refresh the built-in list, run:
+The tuner has all 51 channels built in, so it works offline and opens instantly. Once a day it also downloads SomaFM's `channels.json` in the background (58 KB, read with a string scan instead of `json.load`), so seasonal channels appear and disappear. That request sets this project's User-Agent. The audio streams can't: the firmware always sends `AWTRIX-NG` for them (see [NOTICE.md](NOTICE.md)). A channel that SomaFM adds later appears with a grey colour bar. To give it a colour, and to refresh the built-in list, run:
 
 ```sh
 python3 -m venv .venv && .venv/bin/pip install -r tools/requirements.txt
@@ -120,9 +122,10 @@ Tested on a TC002 with firmware 1.2.3:
 Not confirmed by a test or log yet:
 - closing after idle
 - a favourite that SomaFM removes showing "off air", and a new channel appearing in grey
+- the exact User-Agent the clock sends for `channels.json` (the download works with the header set, but the value wasn't captured)
 
 Known open question: an early version of the tuner showed "no signal" while the stream was playing. It no longer happens, but the cause was never identified. If it comes back, check the `station:` lines in the log.
 
 ## License
 
-[MIT](LICENSE) for this project's code. SomaFM's name, streams, logos and content belong to SomaFM.
+[MIT](LICENSE) for this project's code only. SomaFM's name, streams, data, logos and other content belong to SomaFM and are not covered by that licence. See [NOTICE.md](NOTICE.md).

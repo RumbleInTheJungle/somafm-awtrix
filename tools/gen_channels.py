@@ -27,7 +27,9 @@ from PIL import Image
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 LIB = ROOT / "scripts" / "somafm_lib.be"
 CHANNELS_URL = "https://somafm.com/channels.json"
-UA = {"User-Agent": "somafm-awtrix-generator"}
+# Identifies this project to SomaFM, at their request. If you fork this code,
+# change it to your own project and get your own permission (see NOTICE.md).
+UA = {"User-Agent": "somafm-awtrix-tools/1.2 (+https://github.com/RumbleInTheJungle/somafm-awtrix)"}
 
 GREY = 0xB4B4B4  # channels whose logo has no vivid colour
 

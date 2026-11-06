@@ -1,7 +1,7 @@
 # @name     SomaFM
 # @desc     Do not install this script directly. Install SomaFM Radio to get the whole package: https://awtrix.de/script/lR85BD2PCMjm
 # @author   Thomas
-# @version  1.1.1
+# @version  1.2.0
 # @ondemand
 # @display  52x16
 # @requires somafm_lib tUwQ3ndGHAUU
@@ -10,6 +10,11 @@
 # @config   accent    color  "Accent colour"     default=#FFA830
 # @config   host      text   "Clock API address" default="127.0.0.1" help="Used by 'Radio off'. If the radio doesn't stop, enter this clock's own IP address."
 # @config   online    bool   "Update channel list online" default=true help="Fetch SomaFM's channel list once a day, so seasonal channels come and go"
+#
+# Unofficial hobby project, not affiliated with or endorsed by SomaFM but used
+# with their permission. SomaFM's streams and JSON files are not a free data
+# feed, and the permission doesn't carry over to forks or other projects. Read
+# their terms first: https://somafm.com/contact/tos.html (see also NOTICE.md).
 
 import somafm_lib as sf
 
@@ -130,8 +135,9 @@ class SomaTuner
     end
   end
 
-  # Once a day: fetch channels.json in the background. Failures are silent;
-  # the stored or built-in list stays in use.
+  # Once a day: fetch channels.json in the background, used with SomaFM's
+  # permission and identified by sf.USER_AGENT. Failures are silent; the stored
+  # or built-in list stays in use.
   def maybe_refresh()
     if !self.online return end
     var y = year()
@@ -158,7 +164,7 @@ class SomaTuner
       self.load_chans()
       self.build_items()
       self.update_list_view()
-    end, {"cap": cap, "timeout": 15})
+    end, {"cap": cap, "timeout": 15, "headers": {"User-Agent": sf.USER_AGENT}})
   end
 
   # Channel id of what the radio plays, nil if nothing / not recognisable.

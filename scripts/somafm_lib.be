@@ -2,12 +2,24 @@
 # @name    SomaFM library
 # @desc    Do not install this script directly. Install SomaFM Radio to get the whole package: https://awtrix.de/script/lR85BD2PCMjm
 # @author  Thomas
-# @version 1.1.1
+# @version 1.2.0
 # @display 52x16
+#
+# Unofficial hobby project, not affiliated with or endorsed by SomaFM but used
+# with their permission. SomaFM's streams and JSON files are not a free data
+# feed, and the permission doesn't carry over to forks or other projects. Read
+# their terms first: https://somafm.com/contact/tos.html (see also NOTICE.md).
 
 import string
 
 var m = module("somafm_lib")
+
+# ---------------------------------------------------------------------------
+# Identifies this project to SomaFM, at their request, so it doesn't get blocked
+# by mistake. IF YOU FORK THIS CODE, change it to your own project's name and
+# address, and get your own permission from SomaFM.
+# ---------------------------------------------------------------------------
+m.USER_AGENT = "somafm-awtrix/1.2 (+https://github.com/RumbleInTheJungle/somafm-awtrix)"
 
 # ---------------------------------------------------------------------------
 # Palette: SomaFM's web colours (black, #EEE, amber #D8A24D, teal #1A9096),
@@ -125,6 +137,8 @@ end
 
 # MP3 playlist (128k). AWTRIX plays the first stream of a .pls and re-reads
 # the playlist on reconnect, so it fails over between SomaFM's ice servers.
+# Used with SomaFM's permission. The firmware makes this request itself, and its
+# docs have no option for the User-Agent, so USER_AGENT doesn't apply to it.
 m.stream_url = def (id)
   return "https://api.somafm.com/" + id + ".pls"
 end

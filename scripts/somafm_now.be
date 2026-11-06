@@ -1,13 +1,18 @@
 # @name     SomaFM Radio
-# @desc     Listen to SomaFM on the clock's own speaker. Shows the channel, artist and title in the rotation while SomaFM plays. Turn the knob to switch favourites, press it to open the tuner.
+# @desc     Listen to SomaFM on the clock's own speaker. Shows the channel, artist and title in the rotation while SomaFM plays. Turn the knob to switch favourites, press it to open the tuner. Unofficial hobby project, not affiliated with or endorsed by SomaFM but used with their permission.
 # @author   Thomas
-# @version  1.1
+# @version  1.2
 # @display  52x16
 # @requires somafm_lib tUwQ3ndGHAUU
 # @requires SomaFM E0TtuZwX4rjx
 # @config   big     bool  "Large title"   default=true help="Bigger song title, easier to read from across the room"
 # @config   accent  color "Channel name colour" default=#FFA830
 # @config   host    text  "Clock API address" default="127.0.0.1" help="Used to open the SomaFM tuner. If it won't open, enter this clock's own IP address."
+#
+# Unofficial hobby project, not affiliated with or endorsed by SomaFM but used
+# with their permission. SomaFM's streams and JSON files are not a free data
+# feed, and the permission doesn't carry over to forks or other projects. Read
+# their terms first: https://somafm.com/contact/tos.html (see also NOTICE.md).
 
 import somafm_lib as sf
 

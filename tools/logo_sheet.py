@@ -3,7 +3,9 @@
 
 Fetches the logos live and draws each one as round LEDs, with the channel's
 signature colour from scripts/somafm_lib.be as a bar on the left of its tile.
-The image stays local: the logos belong to SomaFM.
+The image stays local: the logos are copyrighted by SomaFM. They allowed this
+project to convert them for this radio app. Any other use requires permission
+from SomaFM (see NOTICE.md).
 
 Usage:  python3 tools/logo_sheet.py [docs/logos_16x16.png]
 """
@@ -17,7 +19,9 @@ import urllib.request
 from PIL import Image, ImageDraw
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-UA = {"User-Agent": "somafm-awtrix-generator"}
+# Identifies this project to SomaFM, at their request. If you fork this code,
+# change it to your own project and get your own permission (see NOTICE.md).
+UA = {"User-Agent": "somafm-awtrix-tools/1.2 (+https://github.com/RumbleInTheJungle/somafm-awtrix)"}
 COLUMNS = 9
 LED = 8          # pixels per LED
 GAP = 22         # space between tiles

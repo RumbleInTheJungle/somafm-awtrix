@@ -12,6 +12,11 @@
 #   knob turn         radioVolume +/- 5                   -> checks settings.set("radioVolume")
 #   knob press        toggle large/small font for line 2  -> legibility check
 # Screen: line 1 = music.station() id or "-", line 2 = music.title()
+#
+# Unofficial hobby project, not affiliated with or endorsed by SomaFM but used
+# with their permission. SomaFM's streams and JSON files are not a free data
+# feed, and the permission doesn't carry over to forks or other projects. Read
+# their terms first: https://somafm.com/contact/tos.html (see also NOTICE.md).
 
 import somafm_lib as sf
 
@@ -65,7 +70,7 @@ class Spike
         log("channels.json -> status " + str(status) + ", " + str(size(body)) + " bytes in "
             + str(t1 - t0) + " ms, parsed " + str(size(rows)) + " channels in " + str(now_ms() - t1) + " ms")
         if size(rows) > 0 log("first: " + str(rows[0])) end
-      end, {"cap": 81920, "timeout": 15})
+      end, {"cap": 81920, "timeout": 15, "headers": {"User-Agent": sf.USER_AGENT}})
     end
     return true
   end
