@@ -2,7 +2,7 @@
 """Render every SomaFM channel logo at 16x16, as it would look on the LEDs.
 
 Fetches the logos live and draws each one as round LEDs, with the channel's
-signature colour from scripts/somafm_lib.be as a bar on the left of its tile.
+signature colour from scripts/somafm.be as a bar on the left of its tile.
 The image stays local: the logos are copyrighted by SomaFM. They allowed this
 project to convert them for this radio app. Any other use requires permission
 from SomaFM (see NOTICE.md).
@@ -21,7 +21,7 @@ from PIL import Image, ImageDraw
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 # Identifies this project to SomaFM, at their request. If you fork this code,
 # change it to your own project and get your own permission (see NOTICE.md).
-UA = {"User-Agent": "somafm-awtrix-tools/1.2 (+https://github.com/RumbleInTheJungle/somafm-awtrix)"}
+UA = {"User-Agent": "somafm-awtrix-tools/2.0(+https://github.com/RumbleInTheJungle/somafm-awtrix)"}
 COLUMNS = 9
 LED = 8          # pixels per LED
 GAP = 22         # space between tiles
@@ -36,7 +36,7 @@ def fetch(url):
 
 def main():
     out = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "docs" / "logos_16x16.png"
-    table = (ROOT / "scripts" / "somafm_lib.be").read_text(encoding="utf-8")
+    table = (ROOT / "scripts" / "somafm.be").read_text(encoding="utf-8")
     colours = {m[0]: int(m[1], 16) for m in re.findall(r'\["([a-z0-9]+)", "[^"]*", "[^"]*", 0x([0-9A-F]{6})\]', table)}
     channels = sorted(json.loads(fetch("https://somafm.com/channels.json"))["channels"], key=lambda c: c["title"].lower())
 

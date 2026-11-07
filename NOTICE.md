@@ -14,7 +14,7 @@ SomaFM is listener-supported. Third-party apps cost them real money in bandwidth
 
 - **The permission doesn't come with the code.** It was given to this project. A fork or a derived app needs its own permission from SomaFM.
 - **The MIT licence covers this project's code only.** It gives you no rights to SomaFM's streams, `channels.json`, name, channel names and descriptions, logos or other content.
-- **Change the User-Agent.** Set `m.USER_AGENT` in `scripts/somafm_lib.be` and `UA` in `tools/` to your own project's name and address, so SomaFM can tell your project apart from this one.
+- **Change the User-Agent.** Set `sf.USER_AGENT` in `scripts/somafm.be` and `UA` in `tools/` to your own project's name and address, so SomaFM can tell your project apart from this one.
 
 ## Logos
 
@@ -28,8 +28,8 @@ SomaFM asked this project to identify itself, so it doesn't get blocked by mista
 
 | Request | User-Agent |
 |---|---|
-| `channels.json` from the clock | `somafm-awtrix/1.2 (+https://github.com/RumbleInTheJungle/somafm-awtrix)` |
-| `channels.json` and logos from `tools/` | `somafm-awtrix-tools/1.2 (+https://github.com/RumbleInTheJungle/somafm-awtrix)` |
+| `channels.json` from the clock | `somafm-awtrix/2.0 (+https://github.com/RumbleInTheJungle/somafm-awtrix)` |
+| `channels.json` and logos from `tools/` | `somafm-awtrix-tools/2.0 (+https://github.com/RumbleInTheJungle/somafm-awtrix)` |
 | `.pls` playlists and audio streams | `AWTRIX-NG`, set by the firmware (measured on firmware 1.2.3) |
 
 AWTRIX-NG's documentation has no option for setting the User-Agent of a radio stream from a script, so the streams can't carry this project's name for now.
