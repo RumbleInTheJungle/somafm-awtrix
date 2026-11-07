@@ -40,13 +40,17 @@ The app takes a normal turn in the rotation while SomaFM plays. While the radio 
 
 ## Settings (gear icon on the Apps tab)
 
-**Show when radio is off:** turn this off to keep the app out of the rotation while the radio is off. Start the radio with hold select → **Radio** if you've saved a SomaFM station on the clock, or with **Show** on the web UI's Apps tab.
+**Show when radio is off:** turn this off to keep the app out of the rotation while the radio is off. You can then start the radio with hold select → **Radio**, or with **Show** on the web UI's Apps tab.
+
+**Update channel list:** turn it on and press **Save** to download SomaFM's current channel list once. It turns itself off again.
+
+**Saved stations:** you can also save SomaFM channels as stations in the web UI's Radio settings. Name each station exactly like the channel (for example `Groove Salad`), or include "SomaFM" in its name, so the app recognises it.
 
 Radio off stops the radio by calling the clock's own REST API (`POST /api/v1/audio/stop`), because Berry has no stop call.
 
 ## Channel list
 
-The app has all 51 channels built in, so it works offline. When you first use the knob, at most once a day, it also downloads SomaFM's `channels.json` in the background (58 KB, read with a string scan instead of `json.load`), so seasonal channels appear and disappear. That request sets this project's User-Agent. The audio streams can't: the firmware always sends `AWTRIX-NG` for them (see [NOTICE.md](NOTICE.md)). A channel that SomaFM adds later appears with a grey colour bar. To give it a colour, and to refresh the built-in list, run:
+The app has all 51 channels built in, so it works offline and makes no requests for the list. When SomaFM adds or removes a channel, use **Update channel list** in the settings. It downloads SomaFM's `channels.json` once (58 KB, read with a string scan instead of `json.load`) and keeps it on the clock. That request sets this project's User-Agent. The audio streams can't: the firmware always sends `AWTRIX-NG` for them (see [NOTICE.md](NOTICE.md)). A channel that SomaFM adds later appears with a grey colour bar. To give it a colour, and to refresh the built-in list, run:
 
 ```sh
 python3 -m venv .venv && .venv/bin/pip install -r tools/requirements.txt
@@ -66,9 +70,11 @@ Tested on a TC002 with firmware 1.2.3, version 2:
 - the rotation waiting while the knob is in use, and continuing afterwards
 - the `Radio off / turn knob` view, also while the firmware still reports the stopped station
 - favourites carried over from version 1, and saved on the clock
-- downloading `channels.json` with the User-Agent header set
+- downloading `channels.json` with the User-Agent header set (in 2.0, when the knob was first used)
+- a saved station named `Groove Salad` showing on the card with its title (2.1)
 
 Not tested on version 2:
+- **Update channel list** in the settings (2.1)
 - a station that can't connect showing `no signal`
 - a favourite that SomaFM removes showing "off air", and a new channel appearing in grey
 

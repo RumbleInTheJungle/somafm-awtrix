@@ -28,7 +28,7 @@ SomaFM asked this project to identify itself, so it doesn't get blocked by mista
 
 | Request | User-Agent |
 |---|---|
-| `channels.json` from the clock | `somafm-awtrix/2.0 (+https://github.com/RumbleInTheJungle/somafm-awtrix)` |
+| `channels.json` from the clock, only when **Update channel list** is used | `somafm-awtrix/2.1 (+https://github.com/RumbleInTheJungle/somafm-awtrix)` |
 | `channels.json` and logos from `tools/` | `somafm-awtrix-tools/2.0 (+https://github.com/RumbleInTheJungle/somafm-awtrix)` |
 | `.pls` playlists and audio streams | `AWTRIX-NG`, set by the firmware (measured on firmware 1.2.3) |
 

@@ -1,9 +1,10 @@
 # @name     SomaFM Radio
 # @desc     Listen to SomaFM on the clock's own speaker. Turn the knob to pick a channel, press it for volume, hold it for a favourite. Unofficial hobby project, not affiliated with or endorsed by SomaFM but used with their permission.
 # @author   Thomas
-# @version  2.0.0
+# @version  2.1.0
 # @display  52x16
-# @config   idlecard  bool   "Show when radio is off" default=true help="Short turn in the rotation while the radio is off, so you can start it with the knob."
+# @config   idlecard   bool  "Show when radio is off" default=true help="Short turn in the rotation while the radio is off, so you can start it with the knob."
+# @config   updatelist bool  "Update channel list" default=false help="Turn on and save to download SomaFM's current channel list once. It turns itself off again."
 #
 # Unofficial hobby project, not affiliated with or endorsed by SomaFM but used
 # with their permission. SomaFM's streams and JSON files are not a free data
@@ -19,7 +20,7 @@ var sf = module("somafm")
 # by mistake. IF YOU FORK THIS CODE, change it to your own project's name and
 # address, and get your own permission from SomaFM.
 # ---------------------------------------------------------------------------
-sf.USER_AGENT = "somafm-awtrix/2.0 (+https://github.com/RumbleInTheJungle/somafm-awtrix)"
+sf.USER_AGENT = "somafm-awtrix/2.1 (+https://github.com/RumbleInTheJungle/somafm-awtrix)"
 
 # ---------------------------------------------------------------------------
 # Palette: SomaFM's web colours (black, #EEE, amber #D8A24D, teal #1A9096),
@@ -166,13 +167,18 @@ end
 #   https://api.somafm.com/groovesalad.pls        -> groovesalad
 #   https://ice2.somafm.com/groovesalad-128-mp3   -> groovesalad
 #   https://somafm.com/logos/512/u80s512.png      -> u80s
-# Falls back to the channel title (station names like "Groove Salad: ...").
+# A station saved in the web UI is reported by its name, so an exact channel
+# title counts too ("Groove Salad"). Other text must mention SomaFM, and falls
+# back to a title inside it ("SomaFM Groove Salad").
 # `tbl` is a table of rows starting with [id, title, ...]; default: built-in.
 # Returns nil for anything that isn't a known SomaFM channel.
 sf.id_from_station = def (s, tbl)
   if s == nil || s == "" return nil end
-  if string.find(s, "somafm") < 0 && string.find(s, "SomaFM") < 0 return nil end
   if tbl == nil tbl = sf.CHANNELS end
+  for c : tbl
+    if s == c[1] return c[0] end
+  end
+  if string.find(s, "somafm") < 0 && string.find(s, "SomaFM") < 0 return nil end
   var best = nil
   for c : tbl
     var id = c[0]
@@ -360,14 +366,14 @@ class SomaFM
     end
   end
 
-  # At most once a day, when the knob is first used: fetch channels.json in the
-  # background, used with SomaFM's permission and identified by sf.USER_AGENT.
-  # Failures are silent; the stored or built-in list stays in use.
-  def maybe_refresh()
-    var y = year()
-    if y < 0 return end                                  # clock not set yet
-    var today = y * 10000 + month() * 100 + day()
-    if store.get("chans_day") == today && store.get("chans") != nil return end
+  # Only when asked for in the settings: saving them restarts the app, and this
+  # switches the setting off again before downloading once. channels.json is used
+  # with SomaFM's permission, and sf.USER_AGENT identifies the request. If it
+  # fails, the stored or built-in list stays in use.
+  def setup()
+    if store.get("updatelist") != true return end
+    store.set("updatelist", false)
+    var today = year() * 10000 + month() * 100 + day()
     var cap = 81920
     http.get("https://somafm.com/channels.json", def (body, status)
       if body == nil || status != 200
@@ -560,7 +566,6 @@ class SomaFM
     if !self.active
       self.tick()               # start from what's on the radio now
       self.active = true
-      self.maybe_refresh()
     end
     self.last_input = now_ms()
     rotation.pause()            # input can end a pause, so set it again
