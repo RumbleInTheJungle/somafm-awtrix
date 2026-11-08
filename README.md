@@ -71,9 +71,9 @@ Tested on a TC002 with firmware 1.2.3, version 2:
 - favourites carried over from version 1, and saved on the clock
 - downloading `channels.json` with the User-Agent header set (in 2.0, when the knob was first used)
 - a saved station named `Groove Salad` showing on the card with its title (2.1)
+- **Update channel list** downloading the list once and switching itself off again (2.1, on two clocks)
 
 Not tested on version 2:
-- **Update channel list** in the settings (2.1)
 - a station that can't connect showing `no signal`
 - a favourite that SomaFM removes showing "off air", and a new channel appearing in grey
 
