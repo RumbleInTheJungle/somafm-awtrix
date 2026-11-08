@@ -53,8 +53,7 @@ Radio off stops the radio by calling the clock's own REST API (`POST /api/v1/aud
 The app has all 51 channels built in, so it works offline and makes no requests for the list. When SomaFM adds or removes a channel, use **Update channel list** in the settings. It downloads SomaFM's `channels.json` once (58 KB, read with a string scan instead of `json.load`) and keeps it on the clock. That request sets this project's User-Agent. The audio streams can't: the firmware always sends `AWTRIX-NG` for them (see [NOTICE.md](NOTICE.md)). A channel that SomaFM adds later appears with a grey colour bar. To give it a colour, and to refresh the built-in list, run:
 
 ```sh
-python3 -m venv .venv && .venv/bin/pip install -r tools/requirements.txt
-.venv/bin/python tools/gen_channels.py      # rewrites the table in scripts/somafm.be
+uv run tools/gen_channels.py      # rewrites the table in scripts/somafm.be
 ```
 
 Then paste the updated `somafm.be` into the web UI again. To change a channel's colour by hand, add it to `OVERRIDES` in `tools/gen_channels.py`.

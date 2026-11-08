@@ -7,7 +7,7 @@ The image stays local: the logos are copyrighted by SomaFM. They allowed this
 project to convert them for this radio app. Any other use requires permission
 from SomaFM (see NOTICE.md).
 
-Usage:  python3 tools/logo_sheet.py [docs/logos_16x16.png]
+Usage:  uv run tools/logo_sheet.py [docs/logos_16x16.png]
 """
 import io
 import json

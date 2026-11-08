@@ -8,9 +8,8 @@ full LED brightness), and rewrites the block between
 in scripts/somafm.be.
 
 Usage:
-    pip install -r tools/requirements.txt
-    python3 tools/gen_channels.py            # rewrite the table
-    python3 tools/gen_channels.py --dry-run  # print it only
+    uv run tools/gen_channels.py            # rewrite the table
+    uv run tools/gen_channels.py --dry-run  # print it only
 """
 import argparse
 import colorsys
